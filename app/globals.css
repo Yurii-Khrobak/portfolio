@@ -1,0 +1,246 @@
+/* Reset */
+
+html, body, nav, header, main, footer, h1, h2, label, p {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  --text-color: #828282;
+  --accent-text-color: #070707;
+  --inverse-color-text: #ffffff;
+
+  color: var(--text-color);
+  font-size: 18px;
+}
+
+/* Base */
+
+.container {
+  max-width: 950px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.title {
+  font-size: 34px;
+  font-weight: bold;
+  color: var(--accent-text-color);
+}
+
+.h100 {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Navbar */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 34px 0px;
+  border-bottom: 1px solid;
+  border-color: var(--text-color);
+}
+
+.navbar__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.navbar__link::hover {
+  color: var(--accent-text-color);
+  transition: color 0.2s ease-in;
+
+  font-weight: bold;
+  transition: font-weight 0.2s ease-in;
+}
+
+/* Header */
+
+.header {
+  margin-top: 75px;
+}
+
+.header__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 30px;
+}
+
+.header__name {
+  font-size: 47px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--accent-text-color);
+  width: 235px;
+}
+
+.header__info {
+  color: var(--accent-text-color);
+
+  width: 180px;
+}
+
+.header__img {
+  width: 100%;
+  height: auto;
+}
+
+/* About */
+
+.about {
+  margin-top: 225px;
+}
+
+.about__title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.about__info {
+  text-align: center;
+  max-width: 445px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about__info-item {
+   margin-bottom: 50px;
+   font-size: 15px;
+}
+
+.about__info-item::last-child {
+  margin-bottom: 0px;
+}
+
+/* Portfolio */
+
+.portfolio {
+  margin-top: 225px;
+}
+
+.portfolioItem {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  text-align: center;
+  max-width: 300px;
+}
+
+.portfolioItem__link {
+  color: var(--accent-text-color);
+}
+
+.portfolioList {
+  display: flex;
+  column-gap: 20px;
+  row-gap: 20px;
+  flex-wrap: wrap;
+}
+
+.portfolio__title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Footer */
+
+.footer {
+  margin-top: 225px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.social {
+  display: flex;
+  column-gap: 70px;
+}
+
+.footer__info {
+  margin-bottom: 30px;
+  margin-top: 45px;
+  font-size: 14px;
+}
+
+/* MyComponents */
+
+.myInput {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid;
+  border-color: var(--text-color);
+  color: var(--accent-text-color);
+}
+
+.myBtn {
+  color: var(--inverse-color-text);
+  background-color: var(--accent-text-color);
+  border: none;
+  font-weight: bold;
+  padding: 12px 25px;
+  border-radius: 22.8px
+}
+
+.fileInput {
+  color: var(--accent-text-color);
+}
+/* Admin */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.admin {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin__title {
+  margin-bottom: 25px;
+}
+
+/* 404 */
+.page404__title {
+  color: var(--accent-text-color);
+}
+
+/* Loading */
+.loadingPage__title {
+  color: var(--accent-text-color);
+}
+
+/* Media */
+@media screen and (max-width: 767px) {
+  html, body, nav, header, main, footer, h1, h2, label, p {
+    font-size: 14px
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .header__name {
+    font-size: 39px;
+    max-width: 200px;
+  }
+
+  .header__info {
+    max-width: 140px;
+  }
+
+  .footer__info {
+    font-size: 12px;
+  }
+
+}
