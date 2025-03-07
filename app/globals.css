@@ -210,6 +210,10 @@ html, body, nav, header, main, footer, h1, h2, label, p {
   margin-bottom: 25px;
 }
 
+.admin__text {
+  margin-bottom: 25px;
+}
+
 /* 404 */
 .page404__title {
   color: var(--accent-text-color);

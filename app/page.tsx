@@ -16,7 +16,7 @@ export default function Home() {
 
   async function getProjects() {
     try {
-      const response = await axios.get('http://localhost:3000/api/projects');
+      const response = await axios.get('/api/projects');
       setItemList(response.data);
     } catch (e) {
       console.log(e);

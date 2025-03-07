@@ -1,50 +1,60 @@
 'use client'
 
 import { useState } from 'react';
-import { useRouter } from "next/navigation";
-
-import { signIn } from 'next-auth/react';
-
 import LoginForm from '@/components/admin/LoginForm';
+import { useSession, signIn, signOut } from "next-auth/react";
+import MyButton from '@/components/UI/MyButton';
 
-export default  function Login() {
-  const router = useRouter();
+export default function Login() {
+  const [user, setUser] = useState({
+    username: '',
+    password: ''
+  });
+  const [error, setError] = useState<string>('');
+  const { data: session, status } = useSession();
 
-  const [user, setUser] = useState({login: '', password: ''});
-
-  const login = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
-    try {
-      const response: any = await signIn("credentials", {
-        login: user.login,
-        password: user.password,
-        redirect: false
-      });
-      console.log({ response });
-      if (!response?.error) {
-        router.push("/");
-        router.refresh();
+  const handleSignIn = async (provider: string, options?: any) => {
+    if (provider === 'credentials') {
+      setError('');
+      const result = await signIn(provider, options);
+      
+      if (result?.error) {
+        setError('Invalid username or password');
+        return result;
       }
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      console.log("Login Successful", response);
-    } catch (error: any) {
-      console.error("Login Failed:", error);
+    } else {
+      // For other providers like Google
+      return signIn(provider);
     }
+  };
+
+  if (status === "loading") {
+    return <p>Loading...</p>;
   }
 
-  return(
+  if (session) {
+    return (
+      <main className='admin'>
+        <h1 className='admin__title title'>Admin Dashboard</h1>
+        <p className='admin__text'>Signed in as {session.user?.name}</p>
+        <MyButton
+          onClick={() => signOut({callbackUrl: "/"})}
+        >
+          Sign out
+        </MyButton>
+      </main>
+    );
+  }
+
+  return (
     <main className='admin'>
       <h1 className='admin__title title'>Login</h1>
       <LoginForm
         user={user} 
         setUser={setUser} 
-        login={login}
+        signIn={handleSignIn}
+        error={error}
       />
     </main>
-  )
+  );
 }

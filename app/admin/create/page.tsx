@@ -21,7 +21,7 @@ export default function Create() {
 
 			const updatedProject = { ...project, img_base64: base64 as string };
 			
-			await axios.post('http://localhost:3000/api/projects', JSON.stringify(updatedProject));
+			await axios.post('/api/projects', JSON.stringify(updatedProject));
 		} catch (error) {
 			console.log(error);
 		}

@@ -1,24 +1,64 @@
+import { FormEvent, ChangeEvent } from 'react';
 import MyInput from '../UI/MyInput';
 import MyButton from '../UI/MyButton';
 
-export default function LoginForm({user, setUser, login}) {
-  return(
-    <form className='form' onSubmit={login}>
+interface LoginFormProps {
+  user: {
+    username: string;
+    password: string;
+  };
+  setUser: React.Dispatch<React.SetStateAction<{
+    username: string;
+    password: string;
+  }>>;
+  signIn: (provider: string, options?: any) => Promise<any>;
+  error?: string;
+}
+
+export default function LoginForm({ user, setUser, signIn, error }: LoginFormProps) {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    await signIn('credentials', {
+      username: user.username,
+      password: user.password,
+      redirect: false,
+    });
+  };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setUser({
+      ...user,
+      [id]: value
+    });
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="form">
+      {error && <p className="text-red-500 mb-4">{error}</p>}
+      
       <MyInput
-        value={user.login} 
-        onChange={e => setUser({...user, login: e.target.value})}
-        require='true'
-        type='text'
-        placeholder='Login...'
+        id="username"
+        type="text"
+        placeholder="Username"
+        value={user.username}
+        onChange={handleInputChange}
+        required
       />
+      
       <MyInput
-        value={user.password} 
-        onChange={e => setUser({...user, password: e.target.value})}
-        require='true'
-        type='text'
-        placeholder='Password...'
+        id="password"
+        type="password"
+        placeholder="Password"
+        value={user.password}
+        onChange={handleInputChange}
+        required
       />
-      <MyButton>Login</MyButton>
+      
+      <MyButton type="submit">
+        Sign In
+      </MyButton>
     </form>
-  )
+  );
 }

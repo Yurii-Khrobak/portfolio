@@ -8,7 +8,7 @@ export default function Header() {
           Yurii khrobak
         </h1>
         <label className='header__info'>
-          Fullstack developer, 16 years old, Boryslav
+          Fullstack developer, 20 years old, Boryslav
         </label>
       </div>
       <Image 

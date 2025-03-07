@@ -25,7 +25,7 @@ export default function CreateForm({
 				placeholder='Link...'
 			/>
 			<FileInput onChange={e => setImg(e.target.files[0])} accept='image/*' />
-			<MyButton>Create</MyButton>
+			<MyButton type='submit'>Create</MyButton>
 		</form>
 	)
 }

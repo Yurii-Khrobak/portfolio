@@ -21,7 +21,7 @@ export default function Update() {
 
 			const updatedProject = { ...project, img_base64: base64 as string };
 
-      await axios.put('http://localhost:3000/api/projects', JSON.stringify(updatedProject));
+      await axios.put('/api/projects', JSON.stringify(updatedProject));
     } catch (error) {
       console.log(error);
     }

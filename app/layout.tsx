@@ -1,10 +1,7 @@
-import './globals.css';
-import type { Metadata } from 'next';
+'use client'
 
-export const metadata: Metadata = {
-  title: 'Portfolio',
-  description: 'K.Yurii portfolio',
-}
+import './globals.css';
+import { SessionProvider } from "next-auth/react";
 
 export default function RootLayout({
   children,
@@ -13,9 +10,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>Yurii Khrobak | Full-Stack</title>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body>
         <div className='container'>
-         {children}
+          <SessionProvider refetchInterval={5 * 60}>
+            {children}
+          </SessionProvider>
         </div>
       </body>
     </html>

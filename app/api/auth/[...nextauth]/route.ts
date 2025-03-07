@@ -1,39 +1,39 @@
-import NextAuth from "next-auth/next";
+import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-const handler = NextAuth({
-  session: {
-    strategy: "jwt",
-  },
-
-  pages: {
-    signIn: "/admin/login",
-  },
-
+const authOptions = {
   providers: [
     CredentialsProvider({
+      // The name to display on the sign in form (e.g. "Sign in with...")
       name: "Credentials",
-
       credentials: {
-        login: {},
-        password: {},
+        username: { label: "Username", type: "text" },
+        password: { label: "Password", type: "password" }
       },
-      async authorize(credentials, req) {
-        const user = req.body;
-
-        const passwordCorrect = 
-
-        if (passwordCorrect) {
+      async authorize(credentials) {
+        // Check if the provided username and password match the ones in .env
+        if (
+          credentials?.username === process.env.ADMIN_USERNAME &&
+          credentials?.password === process.env.ADMIN_PASSWORD
+        ) {
+          // Return a user object if credentials are valid
           return {
-            login: user.login
+            id: "1",
+            name: "Admin User",
+            email: "admin@example.com",
           };
         }
-
-        console.log("credentials", credentials);
+        // Return null if credentials are invalid
         return null;
-      },
-    }),
+      }
+    })
   ],
-});
+  pages: {
+    signIn: '/admin/login',
+  },
+};
 
-export { handler as GET, handler as POST };
+const handler = NextAuth(authOptions);
+
+export const GET = handler;
+export const POST = handler;

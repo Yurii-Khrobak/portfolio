@@ -27,7 +27,7 @@ export default function UpdateForm({project, setProject, updateProject, setImg})
         placeholder='Link...'
       />
       <FileInput onChange={e => setImg(e.target.files[0])}/>
-      <MyButton>Update</MyButton>
+      <MyButton type='submit'>Update</MyButton>
     </form>
   )
 }
